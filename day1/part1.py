@@ -1,14 +1,8 @@
 def wrap_to_zero(dial_pos):
-    if dial_pos > 99:
-        # Anything over 99 wraps back around to 0
-        dial_pos = dial_pos - 100
+    if dial_pos > 99 or dial_pos < 0:
+        # Anything over 99 wraps back around to 0, Anything under 0 wraps around to 99
+        dial_pos = dial_pos - 100 if dial_pos > 99 else 100 + dial_pos
         dial_pos = wrap_to_zero(dial_pos)
-        pass
-    elif dial_pos < 0:
-        # Anything under 0 wraps around to 99
-        dial_pos = 100 + dial_pos
-        dial_pos = wrap_to_zero(dial_pos)
-        pass
 
     return dial_pos
 
@@ -36,14 +30,15 @@ def apply_rotations(dial_pos, rotations, zero_count=0):
     return dial_pos, zero_count
 
 def main():
-    # with open("day1/sample.txt", "r") as r:
-    #     p_input = r.readlines()
-    # p_input = [line.strip() for line in p_input]
+    with open("day1/sample.txt", "r") as r:
+        p_input = r.readlines()
+    p_input = [line.strip() for line in p_input]
 
-    # dial_pos = 50
-    # dial_pos, zero_count = apply_rotations(dial_pos, p_input)
+    dial_pos = 50
+    dial_pos, zero_count = apply_rotations(dial_pos, p_input)
 
-    # print(dial_pos, zero_count)
+    print(dial_pos, zero_count)
+    
     with open("day1/input.txt", "r") as r:
         p_input = r.readlines()
     p_input = [line.strip() for line in p_input]
